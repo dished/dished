@@ -2,25 +2,114 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#CCCCFF" 
+    android:padding="10sp" >
+   
+	<!-- Dish name and input box side by side  -->
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/largetext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dish it"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+		<TextView
+        	android:id="@+id/largetext"
+	   	 	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="Dish Name: "
+	    	android:textSize="20sp"
+	    	android:gravity="center_vertical"
+	   		android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+		<EditText
+		    android:id="@+id/editText1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:ems="10"
+		    android:maxLength="100"
+		    android:maxWidth="300sp"/>
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tasty?" />
+    </LinearLayout>	
     
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Spicy?" />
+    <!-- Restaurant and input box side by side  -->
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
 
+		<TextView
+        	android:id="@+id/largetext"
+	   	 	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="Restaurant: "
+	    	android:textSize="20sp"
+	    	android:gravity="center_vertical"
+	   		android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+		<EditText
+	    	android:id="@+id/editText1"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	   		android:ems="10"
+	   		android:maxLength="100"
+	   		android:maxWidth="300sp" />
+    </LinearLayout>	
+    
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+		
+    	<TextView
+        	android:id="@+id/largetext1"
+       	 	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Tasty?"
+        	android:textSize="15sp" />
+
+    	<RatingBar
+	        android:id="@+id/ratingBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:numStars="5" 
+	        android:stepSize="1"/>
+    </LinearLayout>	
+    
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+		
+	    <TextView
+	        android:id="@+id/largetext1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Tasty?"
+	        android:textSize="15sp" />
+
+	    <RatingBar
+	        android:id="@+id/ratingBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:numStars="5" />
+    </LinearLayout>	
+    
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+		
+	    <TextView
+	        android:id="@+id/largetext1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Tasty?"
+	        android:textSize="15sp" />
+	
+	    <RatingBar
+	        android:id="@+id/ratingBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:numStars="5" />
+    </LinearLayout>	
 </LinearLayout>
