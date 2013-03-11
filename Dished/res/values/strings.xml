@@ -4,5 +4,9 @@
     <string name="app_name">Dished</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="button_enter_new">Enter a new dish</string>
+    <string name="button_view">View dishes</string>
+    <string name="title_activity_list_view">List of Dishes</string>
+    
 
 </resources>
