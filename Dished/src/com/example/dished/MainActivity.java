@@ -37,7 +37,6 @@ public class MainActivity extends Activity{
     	Intent intent = new Intent(this, ListViewActivity.class);
     	startActivity(intent);
     	
-    	
     }
     
 }
