@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -12,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class DbConnector {
 
 	DishedDbHelper dbHelper;
+	Logger logger;
 	
 	public DbConnector() {
 		dbHelper = new DishedDbHelper(null);
@@ -20,7 +23,7 @@ public class DbConnector {
 	public long insertRecord(ContentValues values) {
 	
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		
+		logger.info("InfoTest");
 		long newRowId = 0;
 		newRowId = db.insert(DishedTable.TABLE_NAME, null, values);
 		return newRowId;
@@ -39,7 +42,7 @@ public class DbConnector {
 		DishedTable.COL_SIZE,
 		DishedTable.COL_EXTRA};
 		
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_DISH + "DESC");
+		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_DISH + " DESC");
 		List<Map<String,Object>> reviewList = new ArrayList<Map<String,Object>>();
 		
 		if (c.moveToFirst()) {

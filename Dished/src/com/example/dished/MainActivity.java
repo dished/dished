@@ -1,9 +1,11 @@
 package com.example.dished;
 
 import com.example.dished.R;
+import com.example.dished.database.DbConnector;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -32,7 +34,7 @@ public class MainActivity extends Activity{
         return true;
     }
     
-    //Called when user clicks "View dishes" button
+    // Called when user clicks "View dishes" button
     public void ListView (View view){
     	Intent intent = new Intent(this, ListViewActivity.class);
     	startActivity(intent);

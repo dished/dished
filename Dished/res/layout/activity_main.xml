@@ -16,7 +16,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="64sp" />
 
-
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -27,12 +26,22 @@
         android:text="@string/button_enter_new" />
 
     <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/button1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
-        android:text="@string/button_view" 
-        android:onClick="ListView"/>
+        android:onClick="ListView"
+        android:text="@string/button_view" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Button" />
 
 </RelativeLayout>

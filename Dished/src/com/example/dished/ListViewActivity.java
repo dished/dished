@@ -1,5 +1,11 @@
 package com.example.dished;
 
+import java.util.List;
+import java.util.Map;
+
+import com.example.dished.database.DbConnector;
+import com.example.dished.database.DishedTable;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
@@ -8,6 +14,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.content.ContentValues;
+import android.view.Menu;
+import android.widget.TextView;
 
 public class ListViewActivity extends Activity {
 	
@@ -38,7 +47,7 @@ public class ListViewActivity extends Activity {
 		
         View header = (View)getLayoutInflater().inflate(R.layout.dish_list_header, null);
         listView1.addHeaderView(header);
+        listView1.setAdapter(adapter);	
         
-        listView1.setAdapter(adapter);		
 	}
 }	
