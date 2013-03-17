@@ -42,6 +42,7 @@
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:text="Button" />
+        android:onClick="DbTest"
+        android:text="DatabaseTest" />
 
 </RelativeLayout>
