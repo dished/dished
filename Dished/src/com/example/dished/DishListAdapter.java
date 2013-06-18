@@ -25,7 +25,7 @@ public class DishListAdapter extends ArrayAdapter<DishList> {
 		this.data = data;
 	}
 	
-	static class DishListHolder{	//Temporaty holder for efficiency
+	static class DishListHolder{	//Temporary holder for efficiency
 		ImageView imgIcon;
 		TextView txtTitle;
 		TextView txtRating;
