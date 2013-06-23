@@ -6,7 +6,12 @@
     android:layout_height="fill_parent"
     android:background="#FFFFFF"> 
     
-     <ListView
+    <include android:id="@+id/list_header"
+        layout="@layout/dish_list_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"/>
+        
+    <ListView
         android:id="@+id/dish_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>

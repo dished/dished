@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class ListViewActivity extends Activity {
 	
-	private ListView listView1;
+	private ListView dish_listview;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,13 @@ public class ListViewActivity extends Activity {
 		};
 		
 		DishListAdapter adapter = new DishListAdapter(this,
-				R.layout.dish_list_items, dish_data);
+				R.layout.dish_list_row, dish_data);
 		
-		listView1 = (ListView)findViewById(R.id.listView1);
+		dish_listview = (ListView)findViewById(R.id.dish_listview);
 		
         View header = (View)getLayoutInflater().inflate(R.layout.dish_list_header, null);
-        listView1.addHeaderView(header);
-        listView1.setAdapter(adapter);	
-        
+
+        dish_listview.addHeaderView(header);
+        dish_listview.setAdapter(adapter);		
 	}
 }	

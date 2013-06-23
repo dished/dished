@@ -27,13 +27,18 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.dished.ListViewActivity"
-            android:label="@string/title_activity_list_view" 
-            android:parentActivityName="com.example.dished.MainActivity" >
-        	<meta-data
-            	android:name="android.support.PARENT_ACTIVITY"
-            	android:value="com.example.dished.MainActivity" />
-            
+            android:name="com.example.dished.DishListActivity"
+            android:label="@string/title_activity_list_view"
+            android:parentActivityName="com.example.dished.MainActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.dished.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.dished.OneDishActivity"
+            android:label="@string/title_activity_one_dish" 
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
     </application>
 

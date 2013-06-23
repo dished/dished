@@ -25,9 +25,9 @@ public class DishListAdapter extends ArrayAdapter<DishList> {
 		this.data = data;
 	}
 	
-	static class DishListHolder{	//Temporaty holder for efficiency
+	static class DishListHolder{	//Temporary holder for efficiency
 		ImageView imgIcon;
-		TextView txtTitle;
+		TextView txtName;
 		TextView txtRating;
 	}
 	
@@ -42,7 +42,7 @@ public class DishListAdapter extends ArrayAdapter<DishList> {
             
             holder = new DishListHolder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
-            holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
+            holder.txtName = (TextView)row.findViewById(R.id.txtName);
             holder.txtRating = (TextView)row.findViewById(R.id.txtRating);
             
             row.setTag(holder);
@@ -53,7 +53,7 @@ public class DishListAdapter extends ArrayAdapter<DishList> {
 		}
 		
 		DishList dishlist = data[position];
-		holder.txtTitle.setText(dishlist.title);
+		holder.txtName.setText(dishlist.name);
 		holder.txtRating.setText(dishlist.rating);
 		holder.imgIcon.setImageResource(dishlist.icon);
 		

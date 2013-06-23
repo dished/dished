@@ -24,14 +24,33 @@ import android.widget.Toast;
 // Activity = anything that can be displayed on phone
 public class MainActivity extends Activity{
 	
-	EditText first_name;
-    Button button1; 
-	TextView title;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        Button new_dish = (Button) findViewById(R.id.btn_new_dish);
+        new_dish.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startNewDish(v);
+			}
+		});
+        
+        
+        Button view_dish = (Button) findViewById(R.id.btn_view_dish);
+        view_dish.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startDishList(v);
+			}
+		});
+        
     }
     
     @Override
@@ -40,12 +59,18 @@ public class MainActivity extends Activity{
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-    
-    // Called when user clicks "View dishes" button
-    public void ListView (View view){
-    	Intent intent = new Intent(this, ListViewActivity.class);
+      
+    //called when user clicks "New Dish" button
+    public void startNewDish(View v){
+    	Intent intent = new Intent(this, DishOptions.class);
     	startActivity(intent);
-    	
+    }
+    
+
+  //Called when user clicks "View dishes" button
+    public void startDishList(View v){
+    	Intent intent = new Intent(this, DishListActivity.class);
+    	startActivity(intent);
     }
     
     public void DbTest (View view) {

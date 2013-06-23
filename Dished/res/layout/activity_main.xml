@@ -6,18 +6,18 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="Dished"
+        android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="64sp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btn_new_dish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -26,23 +26,24 @@
         android:text="@string/button_enter_new" />
 
     <Button
-        android:id="@+id/button3"
+
+        android:id="@+id/btn_view_dish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button1"
+        android:layout_alignTop="@+id/btn_new_dish"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
-        android:onClick="ListView"
         android:text="@string/button_view" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
+        android:layout_below="@id/btn_view_dish"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:onClick="DbTest"
         android:text="DatabaseTest" />
+
 
 </RelativeLayout>
