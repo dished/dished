@@ -4,17 +4,17 @@ package com.example.dished;
 
 public class DishList {
 	public int icon;
-	public String title;
+	public String name;
 	public String rating;
 	
 	public DishList(){
 		super();
 	}
 	
-	public DishList(int icon, String title, String rating){	//object with img & title & txt
+	public DishList(int icon, String name, String rating){	//object with img & title & txt
 		super();
 		this.icon = icon;
-		this.title = title;
+		this.name = name;
 		this.rating = rating;
 	}
 
