@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 public class DishedTable implements BaseColumns {
 
 	public static final String TABLE_NAME = "Dishes_Table";
-	
+	public static final String COL_ID = BaseColumns._ID;
 	public static final String COL_DISH = "Dish_Name";
 	public static final String COL_RESTAURANT = "Restaurant_Name";
 	public static final String COL_PRICE = "Price";

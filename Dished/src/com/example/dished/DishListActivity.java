@@ -1,15 +1,25 @@
 package com.example.dished;
 
-import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.example.dished.database.DbConnector;
+import com.example.dished.database.DishedDbHelper;
+import com.example.dished.database.DishedTable;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,27 +36,33 @@ public class DishListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dish_list);
 		
-		DishList dish_data[] = new DishList[]	//data of items to be viewed on list
-		{
-				new DishList(R.drawable.ic_launcher, "Ribs", "Good"),
-	            new DishList(R.drawable.ic_launcher, "Android", "Bad"),
-	            new DishList(R.drawable.ic_launcher, "Food", "OK"),
-	            new DishList(R.drawable.ic_launcher, "Food_2", "Terrible"),
-	            new DishList(R.drawable.ic_launcher, "Ribs", "Great"),
-	            new DishList(R.drawable.ic_launcher, "VANCOUVER", "Best"),
-	            new DishList(R.drawable.ic_launcher, "This is a really long line of text for testing", "meh"),
-	            new DishList(R.drawable.ic_launcher, "Seattle", "Decent"),
-	            new DishList(R.drawable.ic_launcher, "CANUCKS", "best")
-		};
+//		DishList dish_data[] = new DishList[]	//data of items to be viewed on list
+//		{
+//				new DishList(R.drawable.ic_launcher, "Ribs", "Good"),
+//	            new DishList(R.drawable.ic_launcher, "Android", "Bad"),
+//	            new DishList(R.drawable.ic_launcher, "Food", "OK")
+//		};
+
+		DbConnector db = MainActivity.db;
+    	ContentValues cv = new ContentValues();
+    	
+    	//Assigning data from DB
+		DishList[] dish_data = new DishList[db.getTotal()];
+		for(int i=0; i<db.getTotal(); i++){
+			int key = i+1;
+			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getDish(key), db.getOverall(key));
+		}
+
+//		dish_data[0] = new DishList(R.drawable.ic_launcher, "Ribs", "Ribs");
 		
-		DishListAdapter adapter = new DishListAdapter(this,
-				R.layout.dish_list_row, dish_data);
+		//Displaying in a listrow
+		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
 		
+		//Displaying listrows in a listview
 		dish_listview = (ListView)findViewById(R.id.dish_listview);
         dish_listview.setAdapter(adapter);		
         
-        
-        //Starting new activity when a lsit row is clicked
+        //Starting new activity when a list row is clicked
         dish_listview.setOnItemClickListener(new OnItemClickListener(){
         	
             @Override

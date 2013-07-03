@@ -4,13 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 
 public class DishedDbHelper extends SQLiteOpenHelper {
 
-	public static String DATABASE_NAME = "Dished.db";
+	public static final String DB_NAME = "Dished.db";
+	public static final int DB_VERSION = 1;
 	
 	public DishedDbHelper(Context context) {
-		super(null, null, null, 1);
+		super(context, null, null, DB_VERSION);
 	}
 
 	@Override
@@ -27,8 +29,10 @@ public class DishedDbHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
+	//String og SQL code creating table & columns
 	public String createDishTableSql() {
 		String createTableSql = "CREATE TABLE " + DishedTable.TABLE_NAME + "(" +
+				DishedTable.COL_ID + " " + "INTEGER" + " PRIMARY KEY AUTOINCREMENT" + "," +
 				DishedTable.COL_DISH + " " + DishedTable.TEXT_TYPE + "," +
 				DishedTable.COL_RESTAURANT + " " + DishedTable.TEXT_TYPE + "," +
 				DishedTable.COL_OVERALL + " " + DishedTable.DOUBLE_TYPE + "," +
@@ -42,7 +46,7 @@ public class DishedDbHelper extends SQLiteOpenHelper {
 	}
 	
 	public String deleteDishTableSql() {
-		String dropSql = "DELETE IF EXISTS " + DishedTable.TABLE_NAME;
+		String dropSql = "DROP TABLE IF EXISTS " + DishedTable.TABLE_NAME;
 		return dropSql;
 	}
 	
