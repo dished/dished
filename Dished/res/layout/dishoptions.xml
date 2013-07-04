@@ -7,13 +7,14 @@
     android:padding="10sp" >
    
 	<!-- Dish name and input box side by side  -->
+
 	<LinearLayout
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal" >
 
 		<TextView
-        	android:id="@+id/largetext"
+        	android:id="@+id/newdish_lblDishName"
 	   	 	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:text="Dish Name: "
@@ -22,7 +23,7 @@
 	   		android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 		<EditText
-		    android:id="@+id/editText1"
+		    android:id="@+id/newdish_txtDishName"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:ems="10"
@@ -38,16 +39,16 @@
 	    android:orientation="horizontal" >
 
 		<TextView
-        	android:id="@+id/largetext"
+        	android:id="@+id/newdish_lblRestaurantName"
 	   	 	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:text="Restaurant: "
+	    	android:text="@string/Restaurant: "
 	    	android:textSize="20sp"
 	    	android:gravity="center_vertical"
 	   		android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 		<EditText
-	    	android:id="@+id/editText1"
+	    	android:id="@+id/newdish_txtRestaurantNames"
 	    	android:layout_width="match_parent"
 	    	android:layout_height="wrap_content"
 	   		android:ems="10"
@@ -55,25 +56,7 @@
 	   		android:maxWidth="300sp" />
     </LinearLayout>	
     
-    <LinearLayout
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
-		
-    	<TextView
-        	android:id="@+id/largetext1"
-       	 	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="Tasty?"
-        	android:textSize="15sp" />
 
-    	<RatingBar
-	        android:id="@+id/ratingBar1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:numStars="5" 
-	        android:stepSize="1"/>
-    </LinearLayout>	
     
     <LinearLayout
 	    android:layout_width="wrap_content"
@@ -81,14 +64,14 @@
 	    android:orientation="horizontal" >
 		
 	    <TextView
-	        android:id="@+id/largetext1"
+	        android:id="@+id/newdish_txtSweets"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Tasty?"
+	        android:text="Sweet?"
 	        android:textSize="15sp" />
 
 	    <RatingBar
-	        android:id="@+id/ratingBar1"
+	        android:id="@+id/newdish_SweetRating"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:numStars="5" />
@@ -100,16 +83,23 @@
 	    android:orientation="horizontal" >
 		
 	    <TextView
-	        android:id="@+id/largetext1"
+	        android:id="@+id/newdish_txtSpicy"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Tasty?"
+	        android:text="Spicy?"
 	        android:textSize="15sp" />
 	
 	    <RatingBar
-	        android:id="@+id/ratingBar1"
+	        android:id="@+id/newdish_SpicyRating"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:numStars="5" />
-    </LinearLayout>	
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_SaveDish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+	
 </LinearLayout>
