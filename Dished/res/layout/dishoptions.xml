@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#CCCCFF" 
     android:padding="10sp" >
-   
-	<!-- Dish name and input box side by side  -->
 
 	<LinearLayout
 	    android:layout_width="wrap_content"
@@ -17,22 +14,23 @@
         	android:id="@+id/newdish_lblDishName"
 	   	 	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:text="Dish Name: "
+	    	android:text="@string/newdish_DishName"
 	    	android:textSize="20sp"
 	    	android:gravity="center_vertical"
 	   		android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 		<EditText
 		    android:id="@+id/newdish_txtDishName"
+		    android:inputType="text"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:ems="10"
 		    android:maxLength="100"
-		    android:maxWidth="300sp"/>
+		    android:maxWidth="300sp" />
 
     </LinearLayout>	
     
-    <!-- Restaurant and input box side by side  -->
+
 	<LinearLayout
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
@@ -42,13 +40,62 @@
         	android:id="@+id/newdish_lblRestaurantName"
 	   	 	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:text="@string/Restaurant: "
+	    	android:text="@string/newdish_Restaurant"
 	    	android:textSize="20sp"
 	    	android:gravity="center_vertical"
 	   		android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 		<EditText
 	    	android:id="@+id/newdish_txtRestaurantNames"
+	    	android:inputType="text"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	   		android:ems="10"
+	   		android:maxLength="100"
+	   		android:maxWidth="300sp" />
+    </LinearLayout>	
+    
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+
+		<TextView
+        	android:id="@+id/newdish_Price"
+	   	 	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/newdish_Price"
+	    	android:textSize="20sp"
+	    	android:gravity="center_vertical"
+	   		android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+		<EditText
+	    	android:id="@+id/newdish_txtPrice"
+	    	android:inputType="numberDecimal"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	   		android:ems="10"
+	   		android:maxLength="100"
+	   		android:maxWidth="300sp" />
+    </LinearLayout>	
+    
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+
+		<TextView
+        	android:id="@+id/newdish_PrepTime"
+	   	 	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/newdish_PrepTime"
+	    	android:textSize="20sp"
+	    	android:gravity="center_vertical"
+	   		android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+		<EditText
+	    	android:id="@+id/newdish_txtPrepTime"
+	    	android:inputType="time"
 	    	android:layout_width="match_parent"
 	    	android:layout_height="wrap_content"
 	   		android:ems="10"
@@ -67,7 +114,7 @@
 	        android:id="@+id/newdish_txtSweets"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Sweet?"
+	        android:text="@string/newdish_Sweet"
 	        android:textSize="15sp" />
 
 	    <RatingBar
@@ -86,7 +133,7 @@
 	        android:id="@+id/newdish_txtSpicy"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Spicy?"
+	        android:text="@string/newdish_Spicy"
 	        android:textSize="15sp" />
 	
 	    <RatingBar
@@ -96,10 +143,54 @@
 	        android:numStars="5" />
     </LinearLayout>
 
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+		
+	    <TextView
+	        android:id="@+id/newdish_txtOverall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/newdish_Overall"
+	        android:textSize="15sp" />
+	
+	    <RatingBar
+	        android:id="@+id/newdish_OverallRating"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:numStars="5" />
+    </LinearLayout>
+    
+    	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+
+		<TextView
+        	android:id="@+id/newdish_Comment"
+	   	 	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/newdish_Comment"
+	    	android:textSize="20sp"
+	    	android:gravity="center_vertical"
+	   		android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+		<EditText
+	    	android:id="@+id/newdish_txtComments"
+	    	android:inputType="textMultiLine"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	   		android:ems="10"
+	   		android:maxLength="300"
+	   		android:maxWidth="300sp" />
+    </LinearLayout>	
+    
     <Button
         android:id="@+id/btn_SaveDish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save" />
+        android:text="@string/newdish_Save" 
+        android:onClick="saveDish"/>
 	
 </LinearLayout>

@@ -48,7 +48,8 @@ public class MainActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				startNewDish(v);
+				Intent intent = new Intent(MainActivity.this, DishOptions.class);
+		    	startActivity(intent);
 			}
 		});
         
@@ -73,7 +74,7 @@ public class MainActivity extends Activity{
       
     //called when user clicks "New Dish" button
     public void startNewDish(View v){
-    	Intent intent = new Intent(v.getContext(), DishOptions.class);
+    	Intent intent = new Intent(this, DishOptions.class);
     	startActivity(intent);
     }
     
