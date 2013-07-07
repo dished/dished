@@ -9,5 +9,14 @@
     <string name="title_activity_one_dish">OneDishActivity</string>
 
     
-    <string name="newdish-"
+    <string name="newdish_Restaurant"> Restaurant </string>
+    <string name="newdish_DishName"> Dish Name</string>
+    <string name="newdish_Price"> Price</string>
+    <string name ="newdish_PrepTime"> Preparation Time</string>
+    <string name="newdish_Save"> Save</string>
+    <string name="newdish_Spicy"> Spicy?</string>
+    <string name="newdish_Sweet"> Sweet?</string>
+    <string name="newdish_Overall"> Overall?</string>
+    <string name="newdish_Comment"> Comments</string>
+    
 </resources>
