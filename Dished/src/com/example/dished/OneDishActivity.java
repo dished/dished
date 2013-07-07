@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dished.R;
-
 public class OneDishActivity extends Activity {
 
 	@Override

@@ -4,7 +4,6 @@ package com.example.dished;
 import java.util.List;
 import java.util.Map;
 
-import com.example.dished.R;
 import com.example.dished.database.DbConnector;
 import com.example.dished.database.DishedTable;
 
