@@ -5,25 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.dished.database.DbConnector;
-import com.example.dished.database.DishedDbHelper;
-import com.example.dished.database.DishedTable;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Picture;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,8 +34,7 @@ public class DishListActivity extends Activity {
 //		};
 
 		DbConnector db = MainActivity.db;
-    	ContentValues cv = new ContentValues();
-    	
+	
     	//Assigning data from DB
 		DishList[] dish_data = new DishList[db.getTotal()];
 		for(int i=0; i<db.getTotal(); i++){
@@ -71,11 +60,12 @@ public class DishListActivity extends Activity {
                 // getting values from selected ListItem
             	String name = ((TextView) view.findViewById(R.id.txtName)).getText().toString();
                 String description = ((TextView) view.findViewById(R.id.txtRating)).getText().toString();
-                 
+                int index = position;
                 // Starting new intent
                 Intent in = new Intent(getApplicationContext(), OneDishActivity.class);
                 in.putExtra("name", name);
                 in.putExtra("rating", description);
+                in.putExtra("index", index);
                 startActivity(in);
             }
         });

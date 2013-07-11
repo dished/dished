@@ -17,15 +17,6 @@
         android:textSize="64sp" />
     
     <Button
-        android:id="@+id/btn_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-		android:layout_marginBottom = "180dp"
-        android:text="camera" />
-    
-    <Button
         android:id="@+id/btn_new_dish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,5 +43,16 @@
         android:layout_marginTop="14dp"
         android:onClick="DbTest"
         android:text="DatabaseTest" />
+
+    <TextView
+        android:id="@+id/main_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        />
 
 </RelativeLayout>

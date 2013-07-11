@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -29,16 +30,10 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //clicking "camera" button
-        Button camera = (Button) findViewById(R.id.btn_camera);
-        camera.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent (android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-			}
-        });
-        
+        TextView quote = (TextView) findViewById(R.id.main_quote);
+        String quote_ = "\"Forget <i> where</i> to eat. Think <i>what</i> to eat. <br>" +
+        		"Forget <i>restaurants</i>. Think <i>dishes</i>.\"";
+        quote.setText(Html.fromHtml(quote_)); 
         
         //clicking "New Dished" button
         Button new_dish = (Button) findViewById(R.id.btn_new_dish);
