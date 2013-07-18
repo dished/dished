@@ -33,7 +33,7 @@ public class DishListActivity extends Activity {
 //	            new DishList(R.drawable.ic_launcher, "Food", "OK")
 //		};
 
-		DbConnector db = MainActivity.db;
+		DbConnector db = DishOptions.db;//MainActivity.db;
 	
     	//Assigning data from DB
 		DishList[] dish_data = new DishList[db.getTotal()];
