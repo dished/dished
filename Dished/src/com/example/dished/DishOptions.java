@@ -47,6 +47,7 @@ public class DishOptions extends Activity {
 
 	public void saveDish(View v)
 	{
+		Log.i("database", "executeddddd");
 		Bundle extras = getIntent().getExtras();
 		String fn = extras.getString("first_name");
         Toast.makeText(this, fn + " has been saved to your dishes.", Toast.LENGTH_LONG).show();
@@ -70,6 +71,8 @@ public class DishOptions extends Activity {
 		
 		//newdish.put(DishedTable.COL_SWEET, (int) sweet);
 		db.insertRecord(newdish);
+		
+		Log.i("database", "executed");
 		
 		 Intent in = new Intent(getApplicationContext(), DishListActivity.class);
          startActivity(in);
