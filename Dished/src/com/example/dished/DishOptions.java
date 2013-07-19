@@ -28,9 +28,9 @@ public class DishOptions extends Activity {
 	static DbConnector db = new DbConnector();
 	public void saveDish(View v)
 	{
-		Bundle extras = getIntent().getExtras();
-		String fn = extras.getString("first_name");
-        Toast.makeText(this, fn + " has been saved to your dishes.", Toast.LENGTH_LONG).show();
+//		Bundle extras = getIntent().getExtras();
+//		String fn = extras.getString("first_name");
+//        Toast.makeText(this, fn + " has been saved to your dishes.", Toast.LENGTH_LONG).show();
         
 		ContentValues newdish = new ContentValues();
 		
