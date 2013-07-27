@@ -53,7 +53,14 @@ public class DishOptions extends Activity {
 
 		 Intent in = new Intent(getApplicationContext(), DishListActivity.class);
          startActivity(in);
-		
+		// finish();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		finish();
 	}
 	
 	

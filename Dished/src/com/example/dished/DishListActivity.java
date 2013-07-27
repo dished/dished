@@ -29,8 +29,6 @@ public class DishListActivity extends Activity {
 //		DishList dish_data[] = new DishList[]	//data of items to be viewed on list
 //		{
 //				new DishList(R.drawable.ic_launcher, "Ribs", "Good"),
-//	            new DishList(R.drawable.ic_launcher, "Android", "Bad"),
-//	            new DishList(R.drawable.ic_launcher, "Food", "OK")
 //		};
 
 		DbConnector db = DishOptions.db;//MainActivity.db;
@@ -41,9 +39,7 @@ public class DishListActivity extends Activity {
 			int key = i+1;
 			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getDish(key), db.getOverall(key));
 		}
-
-//		dish_data[0] = new DishList(R.drawable.ic_launcher, "Ribs", "Ribs");
-		
+	
 		//Displaying in a listrow
 		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
 		
