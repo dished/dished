@@ -27,9 +27,9 @@ public class DishListActivity extends Activity{
 	DbConnector db = new DbConnector(this);;
 	DishList[] dish_data;
 	private Button sortName;
-	private TextView sortedData;
 	private Button sortRest;
 	private Button sortID;
+	private Button bAdd;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +37,20 @@ public class DishListActivity extends Activity{
 		setContentView(R.layout.activity_dish_list);
 		db.open();
 		initialize();
+		dish_listview = (ListView)findViewById(R.id.dish_listview);
+		bAdd.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent in = new Intent(getApplicationContext(), DishOptions.class);
+				startActivity(in);
+			}
+		});
 		sortName.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//db.sortName();
-				sortedData.setText(db.sortedData());
-				assignSortedData();
+				assignSortedDataDish();
 			}
 		});
 		
@@ -95,40 +102,21 @@ public class DishListActivity extends Activity{
 		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
 		
 		//Displaying listrows in a listview
-		dish_listview = (ListView)findViewById(R.id.dish_listview);
         dish_listview.setAdapter(adapter);	
 	}
 	
-	public void assignSortedData(){
+	public void assignSortedDataDish(){
 		dish_data = new DishList[db.getTotal()];
     	//Assigning data from DB
 		for(int i=0; i<db.getTotal(); i++){
 			int key = i+1;
-			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getSortedDish(key), 
-					db.getRestaurant(key));
+			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getSortedDish(key, DishedTable.COL_DISH), 
+					db.getSortedRest(key, DishedTable.COL_DISH));
 		}
 		//Displaying in a listrow
 		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
 		
 		//Displaying listrows in a listview
-		dish_listview = (ListView)findViewById(R.id.dish_listview);
-        dish_listview.setAdapter(adapter);	
-        adapter.notifyDataSetChanged();
-	}
-	
-	public void assignSortedDataID(){
-		dish_data = new DishList[db.getTotal()];
-    	//Assigning data from DB
-		for(int i=0; i<db.getTotal(); i++){
-			int key = i+1;
-//			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getSortedDishID(key), db.getRestaurant(key));
-			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getSortedDishID(key), db.getRestaurant(key));
-		}
-		//Displaying in a listrow
-		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
-		
-		//Displaying listrows in a listview
-		dish_listview = (ListView)findViewById(R.id.dish_listview);
         dish_listview.setAdapter(adapter);	
         adapter.notifyDataSetChanged();
 	}
@@ -138,9 +126,24 @@ public class DishListActivity extends Activity{
     	//Assigning data from DB
 		for(int i=0; i<db.getTotal(); i++){
 			int key = i+1;
-//			dish_data[i] = new DishList(R.drawable.ic_launcher, db.getSortedDishRest(key), db.getSortedRest(key));
-			dish_data[i] = 
-			new DishList(R.drawable.ic_launcher, db.getSortedDishRest(key), db.getRestaurant(key));
+			dish_data[i] = new DishList(R.drawable.ic_launcher, 
+					db.getSortedDish(key, DishedTable.COL_RESTAURANT), db.getSortedRest(key, DishedTable.COL_RESTAURANT));
+		}
+		//Displaying in a listrow
+		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
+		
+		//Displaying listrows in a listview
+        dish_listview.setAdapter(adapter);	
+        adapter.notifyDataSetChanged();
+	}
+	
+	public void assignSortedDataID(){
+		dish_data = new DishList[db.getTotal()];
+    	//Assigning data from DB
+		for(int i=0; i<db.getTotal(); i++){
+			int key = i+1;
+			dish_data[i] = new DishList(R.drawable.ic_launcher, 
+					db.getSortedDish(key, DishedTable.COL_ID), db.getSortedRest(key, DishedTable.COL_ID));
 		}
 		//Displaying in a listrow
 		DishListAdapter adapter = new DishListAdapter(this, R.layout.dish_list_row, dish_data);
@@ -154,14 +157,14 @@ public class DishListActivity extends Activity{
 	public void initialize(){
 		sortName = (Button) findViewById(R.id.bSortName);
 		sortName.setText("Sort by Name");
-		sortedData=(TextView) findViewById(R.id.tvResult);
  		sortRest = (Button) findViewById(R.id.bSortRest);
  		sortRest.setText("Sort by Rest");
  		sortID = (Button) findViewById(R.id.bSortID);
- 		sortID.setText("Sort by ID");
+ 		sortID.setText("Most Recent");
+ 		bAdd = (Button) findViewById(R.id.bAddFromList);
+ 		bAdd.setText("Add New Dish");
 	}
 
-	
     @Override
     protected void onResume() {
       db.open();

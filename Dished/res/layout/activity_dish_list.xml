@@ -11,6 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
     
+    <Button android:id="@+id/bAddFromList"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    
     <LinearLayout 
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -33,13 +37,6 @@
 
 	</LinearLayout>
     
-    <TextView android:id="@+id/tvResult"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="TextView"/>
-    
-    
-        
     <ListView
         android:id="@+id/dish_listview"
         android:layout_width="match_parent"

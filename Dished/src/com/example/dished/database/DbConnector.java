@@ -87,7 +87,6 @@ public class DbConnector {
 	public String getDish(int pk){
 //		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_DISH}; 
-		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
 		Cursor c = unsortedCursor(columns);
 		String dish_name = "";
 		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
@@ -104,7 +103,6 @@ public class DbConnector {
 	public String getOverall(int pk){
 //		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_OVERALL};
-		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
 		Cursor c = unsortedCursor(columns);
 		String dish_overall = "";
 		int colOverall = c.getColumnIndex(DishedTable.COL_OVERALL);	
@@ -162,33 +160,22 @@ public class DbConnector {
 		total = c.getCount();
 		return total;
 	}
-	
-	public String sortedData(){
+
+	public String getSortedDish(int pk, String sortBy){
 //		db = dbHelper.getWritableDatabase();
-		String[] columns = {DishedTable.COL_ID, DishedTable.COL_DISH};
-		Cursor c = sortByName(columns);
-		String result = "";
-		int colID = c.getColumnIndex(DishedTable.COL_ID);
-		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
-		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
-			result = result + c.getString(colID)+" "+c.getString(colDish) +" ";
+		String[] columns = {DishedTable.COL_DISH}; 
+		Cursor c = null;
+		if(sortBy.equals(DishedTable.COL_DISH)){
+//			columns[0] = DishedTable.COL_DISH;
+			c = sortBy(columns, DishedTable.COL_DISH);
+		}else if(sortBy.equals(DishedTable.COL_RESTAURANT)){
+//			columns[0] = DishedTable.COL_DISH;
+			c = sortBy(columns, DishedTable.COL_RESTAURANT);
+		}else if(sortBy.equals(DishedTable.COL_ID)){
+//			columns[0] = DishedTable.COL_DISH;
+			c = sortBy(columns, DishedTable.COL_ID);
 		}
-		return result;
-	}
-	
-	public String getSortedDish(int pk){
-//		db = dbHelper.getWritableDatabase();
-		String[] columns = {DishedTable.COL_DISH}; 
-		Cursor c = sortByName(columns);
-//		if(sortBy.equals("name")){
-//			c = sortByName(columns, DishedTable.COL_DISH);
-//		}else if(sortBy.equals("id")){
-//			c = sortByName(columns, DishedTable.COL_ID);
-//		}else if(sortBy.equals(DishedTable.COL_RESTAURANT)){
-//			c = sortByName(columns, DishedTable.COL_RESTAURANT);
-//		}
-//		
-		String dish_name = "";
+		String dish_name = null;
 		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
 		int index = pk-1;
 		Log.i("index", ""+index);
@@ -200,63 +187,96 @@ public class DbConnector {
 		return dish_name;
 	}
 	
-	public String getSortedDishID(int pk){
+	public String getSortedRest(int pk, String sortBy){
 //		db = dbHelper.getWritableDatabase();
-		String[] columns = {DishedTable.COL_DISH}; 
-		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
-		Cursor c = sortByID(columns);
-		String dish_name = "";
-		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+		String[] columns = {DishedTable.COL_RESTAURANT}; 
+		Cursor c = null;
+		if(sortBy.equals(DishedTable.COL_DISH)){
+			c = sortBy(columns, DishedTable.COL_DISH);
+		
+		}else if(sortBy.equals(DishedTable.COL_RESTAURANT)){
+			c = sortBy(columns, DishedTable.COL_RESTAURANT);
+		
+		}else if(sortBy.equals(DishedTable.COL_ID)){
+			c = sortBy(columns, DishedTable.COL_ID);
+		}
+		String rest_name = "";
+		int colRest = c.getColumnIndex(DishedTable.COL_RESTAURANT);
 		int index = pk-1;
 		Log.i("index", ""+index);
 		Log.i("num_dishes", ""+c.getCount());
 		if(c.moveToPosition(index)){
-			dish_name = c.getString(colDish);
+			rest_name = c.getString(colRest);
 			Log.i("Move_name", "Successful "+c.getPosition());
 		} else Log.i("Move_name", "FAIL "+c.getPosition());
-		return dish_name;
+		return rest_name;
 	}
+
 	
-	public String getSortedDishRest(int pk){
-//		db = dbHelper.getWritableDatabase();
-		String[] columns = {DishedTable.COL_DISH}; 
-		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
-		Cursor c = sortByRest(columns);
-		String dish_name = "";
-		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
-		int index = pk-1;
-		Log.i("index", ""+index);
-		Log.i("num_dishes", ""+c.getCount());
-		if(c.moveToPosition(index)){
-			dish_name = c.getString(colDish);
-			Log.i("Move_name", "Successful "+c.getPosition());
-		} else Log.i("Move_name", "FAIL "+c.getPosition());
-		return dish_name;
-	}
+//	public String getDishSortedByName(int pk){
+////		db = dbHelper.getWritableDatabase();
+//		String[] columns = {DishedTable.COL_DISH}; 
+//		Cursor c = sortByName(columns);
+//		String dish_name = "";
+//		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+//		int index = pk-1;
+//		Log.i("index", ""+index);
+//		Log.i("num_dishes", ""+c.getCount());
+//		if(c.moveToPosition(index)){
+//			dish_name = c.getString(colDish);
+//			Log.i("Move_name", "Successful "+c.getPosition());
+//		} else Log.i("Move_name", "FAIL "+c.getPosition());
+//		return dish_name;
+//	}
+//	
+//	public String getDishSortedByRest(int pk){
+////		db = dbHelper.getWritableDatabase();
+//		String[] columns = {DishedTable.COL_DISH}; 
+//		Cursor c = sortByRest(columns);
+//		String dish_name = "";
+//		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+//		int index = pk-1;
+//		Log.i("index", ""+index);
+//		Log.i("num_dishes", ""+c.getCount());
+//		if(c.moveToPosition(index)){
+//			dish_name = c.getString(colDish);
+//			Log.i("Move_name", "Successful "+c.getPosition());
+//		} else Log.i("Move_name", "FAIL "+c.getPosition());
+//		return dish_name;
+//	}
 	
-	public String getSortedRest(int pk){
-//		db = dbHelper.getWritableDatabase();
-		String[] columns = {DishedTable.COL_RESTAURANT};
-		Cursor c = sortByRest(columns);
-		String restaurant = "";
-		int colOverall = c.getColumnIndex(DishedTable.COL_RESTAURANT);	
-		if(c.moveToPosition(pk-1)){
-			restaurant = c.getString(colOverall);
-			Log.i("Move_rest", "Successful");
-		} else Log.i("Move_rest", "FAIL");
-		return restaurant;
-	}
 	
-	public Cursor sortByName(String[] columns){
-		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_DISH);
-	}
+//	public String getRestSortedByName(int pk){
+////		db = dbHelper.getWritableDatabase();
+//		String[] columns = {DishedTable.COL_RESTAURANT}; 
+//		Cursor c = sortByName(columns);
+//		String rest_name = "";
+//		int colRest = c.getColumnIndex(DishedTable.COL_RESTAURANT);
+//		int index = pk-1;
+//		Log.i("index", ""+index);
+//		Log.i("num_dishes", ""+c.getCount());
+//		if(c.moveToPosition(index)){
+//			rest_name = c.getString(colRest);
+//			Log.i("Move_name", "Successful "+c.getPosition());
+//		} else Log.i("Move_name", "FAIL "+c.getPosition());
+//		return rest_name;
+//	}
+//	
+//	public String getRestSortedByRest(int pk){
+////		db = dbHelper.getWritableDatabase();
+//		String[] columns = {DishedTable.COL_RESTAURANT};
+//		Cursor c = sortByRest(columns);
+//		String restaurant = "";
+//		int colOverall = c.getColumnIndex(DishedTable.COL_RESTAURANT);	
+//		if(c.moveToPosition(pk-1)){
+//			restaurant = c.getString(colOverall);
+//			Log.i("Move_rest", "Successful");
+//		} else Log.i("Move_rest", "FAIL");
+//		return restaurant;
+//	}
 	
-	public Cursor sortByID(String[] columns){
-		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_ID);
-	}
-	
-	public Cursor sortByRest(String[] columns){
-		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_RESTAURANT);
+	public Cursor sortBy(String[] columns, String sortBy){
+		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, sortBy);
 	}
 	
 	public Cursor unsortedCursor(String[] columns){
