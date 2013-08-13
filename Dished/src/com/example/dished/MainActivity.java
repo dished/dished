@@ -22,13 +22,11 @@ import android.widget.Toast;
 
 // Activity = anything that can be displayed on phone
 public class MainActivity extends Activity{
-	
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         TextView quote = (TextView) findViewById(R.id.main_quote);
         String quote_ = "\"Forget <i> where</i> to eat. Think <i>what</i> to eat. <br>" +
         		"Forget <i>restaurants</i>. Think <i>dishes</i>.\"";
@@ -41,8 +39,7 @@ public class MainActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(MainActivity.this, DishOptions.class);
-		    	startActivity(intent);
+				startNewDish(v);
 			}
 		});
         
@@ -74,40 +71,41 @@ public class MainActivity extends Activity{
 
   //method called when user clicks "View dishes" button
     public void startDishList(View v){
-    	Intent intent = new Intent(this, DishListActivity.class);
+    	Intent intent = new Intent(getApplicationContext(), DishListActivity.class);
     	startActivity(intent);
     }
+
+//    static DbConnector db = new DbConnector();
+//    public void DbTest (View view) {
+//    	Toast.makeText(this, "Running a DbTest", Toast.LENGTH_LONG).show();
+//    	ContentValues cv = new ContentValues();
+//    	
+//    	cv.put(DishedTable.COL_ID, 1);
+//    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken1");
+//    	cv.put(DishedTable.COL_OVERALL, "Awesome1");
+//    	db.insertRecord(cv);
+//    	
+//    	cv.put(DishedTable.COL_ID, 2);
+//    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken2");
+//    	cv.put(DishedTable.COL_OVERALL, "Sucked2");
+//    	db.insertRecord(cv);
+//    	
+//    	cv.put(DishedTable.COL_ID, 3);
+//    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken3");
+//    	cv.put(DishedTable.COL_OVERALL, "Sucked3");
+//    	db.insertRecord(cv);
+//    	
+//    	Log.i("DbTest", "Check1 ");
+//    	
+//    	List<Map<String,Object>> reviewList = db.readAllRecords();
+//    	
+//    	for (Map<String,Object> review : reviewList) {
+//    		String key = review.get(DishedTable.COL_ID).toString();
+//    		Log.i("DbTest ID", ""+Integer.parseInt(key));
+//    		Log.i("DbTest name", review.get(DishedTable.COL_DISH).toString());
+//    		Log.i("DbTest overall", review.get(DishedTable.COL_OVERALL).toString());
+//    	}
+//    }
     
-    static DbConnector db = new DbConnector();
-    public void DbTest (View view) {
-    	Toast.makeText(this, "Running a DbTest", Toast.LENGTH_LONG).show();
-    	ContentValues cv = new ContentValues();
-    	
-    	cv.put(DishedTable.COL_ID, 1);
-    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken1");
-    	cv.put(DishedTable.COL_OVERALL, "Awesome1");
-    	db.insertRecord(cv);
-    	
-    	cv.put(DishedTable.COL_ID, 2);
-    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken2");
-    	cv.put(DishedTable.COL_OVERALL, "Sucked2");
-    	db.insertRecord(cv);
-    	
-    	cv.put(DishedTable.COL_ID, 3);
-    	cv.put(DishedTable.COL_DISH, "Kung Pao Chicken3");
-    	cv.put(DishedTable.COL_OVERALL, "Sucked3");
-    	db.insertRecord(cv);
-    	
-    	Log.i("DbTest", "Check1 ");
-    	
-    	List<Map<String,Object>> reviewList = db.readAllRecords();
-    	
-    	for (Map<String,Object> review : reviewList) {
-    		String key = review.get(DishedTable.COL_ID).toString();
-    		Log.i("DbTest ID", ""+Integer.parseInt(key));
-    		Log.i("DbTest name", review.get(DishedTable.COL_DISH).toString());
-    		Log.i("DbTest overall", review.get(DishedTable.COL_OVERALL).toString());
-    	}
-    }
-    
+
 }

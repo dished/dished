@@ -10,6 +10,35 @@
         layout="@layout/dish_list_header"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
+    
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    
+	    <Button android:id="@+id/bSortName"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"/>
+	    
+	    <Button android:id="@+id/bSortRest"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"/>
+	    	    
+	    <Button android:id="@+id/bSortID"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"/>
+
+	</LinearLayout>
+    
+    <TextView android:id="@+id/tvResult"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="TextView"/>
+    
+    
         
     <ListView
         android:id="@+id/dish_listview"

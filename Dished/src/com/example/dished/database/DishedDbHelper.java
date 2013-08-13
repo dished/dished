@@ -5,14 +5,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class DishedDbHelper extends SQLiteOpenHelper {
 
-	public static final String DB_NAME = "Dished.db";
-	public static final int DB_VERSION = 1;
+	private static final String DB_NAME = "Dished.db";
+	private static final int DB_VERSION = 1;
+	Context context;
 	
 	public DishedDbHelper(Context context) {
-		super(context, null, null, DB_VERSION);
+		super(context, DB_NAME, null, DB_VERSION);
+		this.context = context;
 	}
 
 	@Override
@@ -25,11 +28,14 @@ public class DishedDbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		db.execSQL(deleteDishTableSql());
-		onCreate(db);
+	    Log.w(DishedDbHelper.class.getName(),
+	            "Upgrading database from version " + oldVersion + " to "
+	                + newVersion + ", which will destroy all old data");
+	    db.execSQL(deleteDishTableSql());
+		this.onCreate(db);
 	}
 	
-	//String og SQL code creating table & columns
+	//String of SQL code creating table & columns
 	public String createDishTableSql() {
 		String createTableSql = "CREATE TABLE " + DishedTable.TABLE_NAME + "(" +
 				DishedTable.COL_ID + " " + "INTEGER" + " PRIMARY KEY AUTOINCREMENT" + "," +

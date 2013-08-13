@@ -19,4 +19,11 @@
     <string name="newdish_Overall"> Overall?</string>
     <string name="newdish_Comment"> Comments</string>
     
+    <string name="sortBy_prompt">Sort by: </string>
+    <string-array name="sortBy_arrays">
+        <item>Dish Name</item>
+        <item>Restaurant Name</item>
+        <item>Order Submitted</item>
+    </string-array>
+    
 </resources>

@@ -20,13 +20,14 @@ import android.widget.TextView;
 
 public class OneDishActivity extends Activity {
 
+	DbConnector db = new DbConnector(this);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_one_dish);
 		
-        DbConnector db = DishOptions.db;
-		
+        db.open();
+        
 		Intent in = getIntent();
 		//Receiving the title and rating 
         String name = in.getStringExtra("name");
@@ -66,6 +67,16 @@ public class OneDishActivity extends Activity {
 		return true;
 	}
 	
-	
+    @Override
+    protected void onResume() {
+      db.open();
+      super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+      db.close();
+      super.onPause();
+    }
 
 }

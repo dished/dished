@@ -6,27 +6,38 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class DbConnector {
 
 	DishedDbHelper dbHelper;
+	SQLiteDatabase db;
 	
-	public DbConnector() {
-		dbHelper = new DishedDbHelper(null);
+	public DbConnector(Context context) {
+		dbHelper = new DishedDbHelper(context);
+	}
+	
+	public void open() throws SQLException{
+		db = dbHelper.getWritableDatabase();
+	}
+	
+	public void close(){
+		dbHelper.close();
 	}
 	
 	public long insertRecord(ContentValues values) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		long newRowId = 0;
 		newRowId = db.insert(DishedTable.TABLE_NAME, null, values);
 		return newRowId;
 	}
 	
 	public List<Map<String,Object>> readAllRecords() {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {
 			DishedTable.COL_ID,
 			DishedTable.COL_DISH,
@@ -59,7 +70,7 @@ public class DbConnector {
 	}
 	
 	public String getData(){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_ID, DishedTable.COL_DISH, DishedTable.COL_OVERALL};
 		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
 		String result = "";
@@ -74,9 +85,10 @@ public class DbConnector {
 	}
 	
 	public String getDish(int pk){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_DISH}; 
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		String dish_name = "";
 		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
 		int index = pk-1;
@@ -90,9 +102,10 @@ public class DbConnector {
 	}
 	
 	public String getOverall(int pk){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_OVERALL};
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		String dish_overall = "";
 		int colOverall = c.getColumnIndex(DishedTable.COL_OVERALL);	
 		if(c.moveToPosition(pk-1)){
@@ -103,9 +116,9 @@ public class DbConnector {
 	}
 	
 	public String getRestaurant(int pk){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_RESTAURANT};
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		String restaurant = "";
 		int colOverall = c.getColumnIndex(DishedTable.COL_RESTAURANT);	
 		if(c.moveToPosition(pk-1)){
@@ -116,9 +129,9 @@ public class DbConnector {
 	}
 	
 	public String getPrice(int pk){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_PRICE};
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		String price = "";
 		int colOverall = c.getColumnIndex(DishedTable.COL_PRICE);	
 		if(c.moveToPosition(pk-1)){
@@ -129,9 +142,9 @@ public class DbConnector {
 	}
 	
 	public String getTime(int pk){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+//		db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_TIME};
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		String time = "";
 		int colOverall = c.getColumnIndex(DishedTable.COL_TIME);	
 		if(c.moveToPosition(pk-1)){
@@ -143,10 +156,110 @@ public class DbConnector {
 	
 	public int getTotal(){
 		int total=0;
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+	//	db = dbHelper.getWritableDatabase();
 		String[] columns = {DishedTable.COL_ID};
-		Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = unsortedCursor(columns);
 		total = c.getCount();
 		return total;
+	}
+	
+	public String sortedData(){
+//		db = dbHelper.getWritableDatabase();
+		String[] columns = {DishedTable.COL_ID, DishedTable.COL_DISH};
+		Cursor c = sortByName(columns);
+		String result = "";
+		int colID = c.getColumnIndex(DishedTable.COL_ID);
+		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+			result = result + c.getString(colID)+" "+c.getString(colDish) +" ";
+		}
+		return result;
+	}
+	
+	public String getSortedDish(int pk){
+//		db = dbHelper.getWritableDatabase();
+		String[] columns = {DishedTable.COL_DISH}; 
+		Cursor c = sortByName(columns);
+//		if(sortBy.equals("name")){
+//			c = sortByName(columns, DishedTable.COL_DISH);
+//		}else if(sortBy.equals("id")){
+//			c = sortByName(columns, DishedTable.COL_ID);
+//		}else if(sortBy.equals(DishedTable.COL_RESTAURANT)){
+//			c = sortByName(columns, DishedTable.COL_RESTAURANT);
+//		}
+//		
+		String dish_name = "";
+		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+		int index = pk-1;
+		Log.i("index", ""+index);
+		Log.i("num_dishes", ""+c.getCount());
+		if(c.moveToPosition(index)){
+			dish_name = c.getString(colDish);
+			Log.i("Move_name", "Successful "+c.getPosition());
+		} else Log.i("Move_name", "FAIL "+c.getPosition());
+		return dish_name;
+	}
+	
+	public String getSortedDishID(int pk){
+//		db = dbHelper.getWritableDatabase();
+		String[] columns = {DishedTable.COL_DISH}; 
+		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = sortByID(columns);
+		String dish_name = "";
+		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+		int index = pk-1;
+		Log.i("index", ""+index);
+		Log.i("num_dishes", ""+c.getCount());
+		if(c.moveToPosition(index)){
+			dish_name = c.getString(colDish);
+			Log.i("Move_name", "Successful "+c.getPosition());
+		} else Log.i("Move_name", "FAIL "+c.getPosition());
+		return dish_name;
+	}
+	
+	public String getSortedDishRest(int pk){
+//		db = dbHelper.getWritableDatabase();
+		String[] columns = {DishedTable.COL_DISH}; 
+		//Cursor c = db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
+		Cursor c = sortByRest(columns);
+		String dish_name = "";
+		int colDish = c.getColumnIndex(DishedTable.COL_DISH);
+		int index = pk-1;
+		Log.i("index", ""+index);
+		Log.i("num_dishes", ""+c.getCount());
+		if(c.moveToPosition(index)){
+			dish_name = c.getString(colDish);
+			Log.i("Move_name", "Successful "+c.getPosition());
+		} else Log.i("Move_name", "FAIL "+c.getPosition());
+		return dish_name;
+	}
+	
+	public String getSortedRest(int pk){
+//		db = dbHelper.getWritableDatabase();
+		String[] columns = {DishedTable.COL_RESTAURANT};
+		Cursor c = sortByRest(columns);
+		String restaurant = "";
+		int colOverall = c.getColumnIndex(DishedTable.COL_RESTAURANT);	
+		if(c.moveToPosition(pk-1)){
+			restaurant = c.getString(colOverall);
+			Log.i("Move_rest", "Successful");
+		} else Log.i("Move_rest", "FAIL");
+		return restaurant;
+	}
+	
+	public Cursor sortByName(String[] columns){
+		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_DISH);
+	}
+	
+	public Cursor sortByID(String[] columns){
+		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_ID);
+	}
+	
+	public Cursor sortByRest(String[] columns){
+		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, DishedTable.COL_RESTAURANT);
+	}
+	
+	public Cursor unsortedCursor(String[] columns){
+		return db.query(DishedTable.TABLE_NAME, columns, null, null, null, null, null);
 	}
 }
