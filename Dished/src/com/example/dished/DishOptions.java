@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.text.GetChars;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -16,16 +18,17 @@ import android.widget.Toast;
 public class DishOptions extends Activity {
 
 	TextView title;
-	
+
+	DbConnector db = new DbConnector(this);
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dishoptions);
-        
         title = (TextView) findViewById(R.id.newdish_lblDishName);
-     
+        db.open();
 	}
-	static DbConnector db = new DbConnector();
+		
+	
 	public void saveDish(View v)
 	{
 //		Bundle extras = getIntent().getExtras();
@@ -47,7 +50,7 @@ public class DishOptions extends Activity {
 		newdish.put(DishedTable.COL_RESTAURANT, resName.getText().toString());
 		newdish.put(DishedTable.COL_PRICE, costPrice.getText().toString());
 		newdish.put(DishedTable.COL_TIME, prepTime.getText().toString());
-		
+		Log.e("db", "working");
 		//newdish.put(DishedTable.COL_SWEET, (int) sweet);
 		db.insertRecord(newdish);
 
@@ -55,15 +58,15 @@ public class DishOptions extends Activity {
          startActivity(in);
 		// finish();
 	}
-	
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		finish();
-	}
-	
-	
+
+
+	  @Override
+	  protected void onPause() {
+		db.close();
+	    super.onPause();
+	    finish();
+	  }
+
 }
 
 

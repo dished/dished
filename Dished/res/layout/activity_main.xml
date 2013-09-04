@@ -34,7 +34,7 @@
         android:layout_marginTop="56dp"
         android:text="@string/button_view" />
 
-    <Button
+<!--  <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,8 +42,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:onClick="DbTest"
-        android:text="DatabaseTest" />
-
+        android:text="DatabaseTest" />   
+-->    
     <TextView
         android:id="@+id/main_quote"
         android:layout_width="wrap_content"

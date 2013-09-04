@@ -20,13 +20,17 @@ import android.widget.TextView;
 
 public class OneDishActivity extends Activity {
 
+	DbConnector db = new DbConnector(this);
+    TextView name_text, rest_text, header, price, time;
+    ImageView image;
+    Button editDish, deleteDish;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_one_dish);
 		
-        DbConnector db = DishOptions.db;
-		
+        db.open();
+        
 		Intent in = getIntent();
 		//Receiving the title and rating 
         String name = in.getStringExtra("name");
@@ -34,29 +38,26 @@ public class OneDishActivity extends Activity {
         int index = in.getIntExtra("index", -1);
         int key = index+1;
         
-        TextView name_text = (TextView) findViewById(R.id.one_dish_name);
-        TextView rest_text = (TextView) findViewById(R.id.one_dish_rest);
+        initialize();
+        
         
         //Setting text for the header
-        TextView header = (TextView) findViewById(R.id.OneDishHeader);
+//        TextView header = (TextView) findViewById(R.id.OneDishHeader);
         header.setText(name);
         
         //Setting the textviews to appropriate data
         name_text.setText(name);		//dish name
         rest_text.setText(db.getRestaurant(key));	//dish restaurant
         
-        //Setting the image of the dish
-        ImageView image = (ImageView) findViewById(R.id.imageView1);
-        image.setImageResource(R.drawable.ic_launcher);
+
         
-        TextView price = (TextView) findViewById(R.id.one_dish_overall_txt);
-        TextView time = (TextView) findViewById(R.id.one_dish_overall_txt1);
-        //TextView overall_2 = (TextView) findViewById(R.id.one_dish_overall_txt2);
+        
+//        TextView price = (TextView) findViewById(R.id.one_dish_overall_txt);
+//        TextView time = (TextView) findViewById(R.id.one_dish_overall_txt1);
         String price_ = "<b>" + "Price: " + "</b>$" + db.getPrice(key);
         String time_ = "<b>" + "Time: " + "</b>" + db.getTime(key) + " minutes";
         price.setText(Html.fromHtml(price_)); 
         time.setText(Html.fromHtml(time_)); 
-       // overall_2.setText(Html.fromHtml(_overall)); 
 	}
 
 	@Override
@@ -66,6 +67,35 @@ public class OneDishActivity extends Activity {
 		return true;
 	}
 	
+	public void initialize(){
+        name_text = (TextView) findViewById(R.id.one_dish_name);
+        rest_text = (TextView) findViewById(R.id.one_dish_rest);
+        header = (TextView) findViewById(R.id.OneDishHeader);
+        //Setting the image of the dish
+        image = (ImageView) findViewById(R.id.imageView1);
+        image.setImageResource(R.drawable.ic_launcher);
+        
+        price = (TextView) findViewById(R.id.one_dish_overall_txt);
+        time = (TextView) findViewById(R.id.one_dish_overall_txt1);
+        
+        
+        editDish = (Button)findViewById(R.id.bEdit);
+        editDish.setText("Edit");
+        deleteDish = (Button)findViewById(R.id.bDelete);
+        deleteDish.setText("Delete");
+        
+	}
 	
+    @Override
+    protected void onResume() {
+      db.open();
+      super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+      db.close();
+      super.onPause();
+    }
 
 }
